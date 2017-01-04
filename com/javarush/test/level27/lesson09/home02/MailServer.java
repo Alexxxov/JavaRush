@@ -11,6 +11,13 @@ public class MailServer implements Runnable {
     public void run() {
         long beforeTime = System.currentTimeMillis();
         //сделайте что-то тут - do something here
+        try {
+            synchronized (mail) {
+                mail.wait();
+            }
+        }
+        catch (InterruptedException e)
+        {}
         String name = Thread.currentThread().getName();
         long afterTime = System.currentTimeMillis();
         System.out.format("%s MailServer has got: [%s] in %d ms after start", name, mail.getText(), (afterTime - beforeTime));
