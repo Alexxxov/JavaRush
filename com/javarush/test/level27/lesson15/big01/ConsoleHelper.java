@@ -31,7 +31,7 @@ public class ConsoleHelper {
         writeMessage("Would you please choose desired dishes!");
         writeMessage(Dish.allDishesToString());
         String s = readString();
-        while (!s.equalsIgnoreCase("exit"))
+        while (!s.equalsIgnoreCase("exit") && !s.equals(""))
         {
             try
             {
