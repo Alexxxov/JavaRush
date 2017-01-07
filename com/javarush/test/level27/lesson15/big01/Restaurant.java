@@ -2,6 +2,7 @@ package com.javarush.test.level27.lesson15.big01;
 
 
 import com.javarush.test.level27.lesson15.big01.kitchen.Cook;
+import com.javarush.test.level27.lesson15.big01.kitchen.Waitor;
 
 import java.io.IOException;
 
@@ -11,10 +12,13 @@ import java.io.IOException;
 public class Restaurant {
 
     public static void main(String[] args) throws IOException {
-        Cook c = new Cook("Amigo");
-        Tablet t = new Tablet(5);
-        t.addObserver(c);
-        t.createOrder();
+        Cook cook = new Cook("Amigo");
+        Tablet tablet = new Tablet(5);
+        Waitor waitor = new Waitor();
+        tablet.addObserver(cook);
+        cook.addObserver(waitor);
+        tablet.createOrder();
+
 
     }
 

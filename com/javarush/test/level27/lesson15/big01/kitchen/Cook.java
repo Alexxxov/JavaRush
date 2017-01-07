@@ -8,7 +8,7 @@ import java.util.Observer;
 /**
  * Created by Admin on 06.01.2017.
  */
-public class Cook implements Observer {
+public class Cook extends Observable implements Observer {
 
     private String name;
 
@@ -24,5 +24,7 @@ public class Cook implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         ConsoleHelper.writeMessage("Start cooking - " + arg);
+        setChanged();
+        notifyObservers(arg);
     }
 }
