@@ -39,7 +39,7 @@ public class ConsoleHelper {
             }
             catch (IllegalArgumentException e)
             {
-                ConsoleHelper.writeMessage(s + "is not found on Menu. Try again!");
+                ConsoleHelper.writeMessage(s + " is not detected");
             }
             s = readString();
         }
