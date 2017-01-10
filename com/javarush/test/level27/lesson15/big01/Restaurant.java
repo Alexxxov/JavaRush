@@ -18,8 +18,6 @@ public class Restaurant {
         tablet.addObserver(cook);
         cook.addObserver(waitor);
         tablet.createOrder();
-
-
     }
 
 }
