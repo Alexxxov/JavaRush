@@ -79,11 +79,11 @@ public class AdvertisementManager {
         {
             int timePerList = 0;
             boolean removeSet = false;
-            for (Advertisement a:iter.next())
+            for (Advertisement a: iter.next())
             {
                 timePerList += a.getDuration();
                 if(a.getHits()<=0 || timePerList > timeSeconds)
-                    removeSet=true;
+                    removeSet = true;
             }
             if(removeSet)
                 iter.remove();
@@ -92,12 +92,10 @@ public class AdvertisementManager {
         Collections.sort(list, new Comparator<List<Advertisement>>() {
             @Override
             public int compare(List<Advertisement> o1, List<Advertisement> o2) {
-
                 long profit1 = calcTotalAmount(o1);
                 long profit2 = calcTotalAmount(o2);
                 int duration1 = calcTotalTime(o1);
                 int duration2 = calcTotalTime(o2);
-
 
                 if (profit1 != profit2)  // первичная по прибыли от показа (по убыванию)
                     return Long.compare(profit2, profit1);
