@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Restaurant {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Cook cook = new Cook("Amigo");
         Tablet tablet = new Tablet(5);
         Waitor waitor = new Waitor();

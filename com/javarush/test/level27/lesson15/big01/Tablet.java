@@ -6,8 +6,6 @@ import com.javarush.test.level27.lesson15.big01.kitchen.Order;
 
 import java.io.IOException;
 import java.util.Observable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +36,7 @@ public class Tablet extends Observable {
                     }
                     catch (NoVideoAvailableException e)
                     {
-                        logger.log(Level.INFO, "No video is available for the order %s" + order);
+                        logger.log(Level.INFO, "No video is available for the order " + order);
                     }
 
                     setChanged();
