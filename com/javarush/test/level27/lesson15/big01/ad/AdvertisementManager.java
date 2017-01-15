@@ -1,6 +1,9 @@
 package com.javarush.test.level27.lesson15.big01.ad;
 
 import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
+import com.javarush.test.level27.lesson15.big01.statistic.StatisticManager;
+import com.javarush.test.level27.lesson15.big01.statistic.event.NoAvailableVideoEventDataRow;
+import com.javarush.test.level27.lesson15.big01.statistic.event.VideoSelectedEventDataRow;
 
 import java.util.*;
 
@@ -21,7 +24,11 @@ public class AdvertisementManager {
     {
         List<Advertisement> ads = getMaxProfitVideos(powerSet(storage.list()));
 
-        if (ads.size() <= 0 || ads == null) throw new NoVideoAvailableException();
+        if (ads.size() <= 0 || ads == null)
+        {
+            StatisticManager.getInstance().register(new NoAvailableVideoEventDataRow(timeSeconds));
+            throw new NoVideoAvailableException();
+        }
 
         //сортируем сначала по убыванию стоимости показа одного видео(если разная стоимость показа),
         //затем (если стоимости равны) сортируем в порядке увеличения стоимости одной секунды видео
@@ -40,6 +47,7 @@ public class AdvertisementManager {
             }
         });
 
+        StatisticManager.getInstance().register(new VideoSelectedEventDataRow(ads, calcTotalAmount(ads), calcTotalTime(ads)));
         for (Advertisement ad: ads)
         {
                 ad.revalidate();

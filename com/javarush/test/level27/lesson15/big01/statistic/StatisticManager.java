@@ -1,5 +1,6 @@
 package com.javarush.test.level27.lesson15.big01.statistic;
 
+import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
 import com.javarush.test.level27.lesson15.big01.statistic.event.EventDataRow;
 import com.javarush.test.level27.lesson15.big01.statistic.event.EventType;
 
@@ -28,18 +29,23 @@ public class StatisticManager {
 
     public void register(EventDataRow data)
     {
-        //TODO
+        statisticStorage.put(data);
     }
 
     private class StatisticStorage
     {
-        private Map<EventType, List<EventDataRow>> map;
+        Map<EventType, List<EventDataRow>> map;
 
         public StatisticStorage()
         {
             map = new HashMap<>();
             for (EventType et: EventType.values())
                 map.put(et, new ArrayList<EventDataRow>());
+        }
+
+        private void put(EventDataRow data)
+        {
+            map.get(data.getType()).add(data);
         }
     }
 }
