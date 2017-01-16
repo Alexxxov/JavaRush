@@ -39,6 +39,10 @@ public class Advertisement
             throw new UnsupportedOperationException();
         else
             hits--;
+
+        if (hits == 1)
+            amountPerOneDisplaying += initialAmount % amountPerOneDisplaying;
+
     }
 
     public int getHits() {

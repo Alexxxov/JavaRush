@@ -15,8 +15,10 @@ public class Cook extends Observable implements Observer {
 
     private String name;
 
-    public Cook(String name) {
+    public Cook(String name)
+    {
         this.name = name;
+        StatisticManager.getInstance().register(this);
     }
 
     @Override
