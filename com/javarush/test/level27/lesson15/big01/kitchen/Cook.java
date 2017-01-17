@@ -2,7 +2,7 @@ package com.javarush.test.level27.lesson15.big01.kitchen;
 
 import com.javarush.test.level27.lesson15.big01.ConsoleHelper;
 import com.javarush.test.level27.lesson15.big01.Tablet;
-import com.javarush.test.level27.lesson15.big01.statistic.StatisticManager;
+import com.javarush.test.level27.lesson15.big01.statistic.StatisticEventManager;
 import com.javarush.test.level27.lesson15.big01.statistic.event.CookedOrderEventDataRow;
 
 import java.util.Observable;
@@ -18,7 +18,7 @@ public class Cook extends Observable implements Observer {
     public Cook(String name)
     {
         this.name = name;
-        StatisticManager.getInstance().register(this);
+        StatisticEventManager.getInstance().register(this);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Cook extends Observable implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        StatisticManager.getInstance().register(new CookedOrderEventDataRow(((Tablet) o).toString(), this.name, ((Order) arg).getTotalCookingTime() * 60, ((Order) arg).getDishes()));
+        StatisticEventManager.getInstance().register(new CookedOrderEventDataRow(((Tablet) o).toString(), this.name, ((Order) arg).getTotalCookingTime() * 60, ((Order) arg).getDishes()));
         ConsoleHelper.writeMessage(String.format("Start cooking - %s, cooking time %dmin", arg.toString(), ((Order) arg).getTotalCookingTime()));
         setChanged();
         notifyObservers(arg);
