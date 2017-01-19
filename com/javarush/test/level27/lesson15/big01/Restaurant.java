@@ -25,11 +25,11 @@ public class Restaurant {
         Waitor waitor = new Waitor();
         cook1.addObserver(waitor);
         cook2.addObserver(waitor);
+        OrderManager orderManager = new OrderManager();
         for (int i = 1; i <= 5; i++)
         {
             allTablets.add(new Tablet(i));
-            allTablets.get(i).addObserver(cook1);
-            allTablets.get(i).addObserver(cook2);
+            allTablets.get(i).addObserver(orderManager);
         }
         RandomOrderGeneratorTask generator = new RandomOrderGeneratorTask(allTablets, ORDER_CREATING_INTERVAL);
         Thread thread = new Thread(generator);

@@ -42,6 +42,10 @@ public class Order
         this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
 
+    public Tablet getTablet() {
+        return tablet;
+    }
+
     @Override
     public String toString()
     {

@@ -19,7 +19,6 @@ public class TestOrder extends Order {
     @Override
     protected void initDishes()
     {
-
             this.dishes = new ArrayList<>();
             Random random = new Random();
             int rand = random.nextInt(Dish.values().length);
@@ -27,6 +26,5 @@ public class TestOrder extends Order {
                 int num = (int) (Math.random() * Dish.values().length);
                 dishes.add(Dish.values()[num]);
             }
-
     }
 }

@@ -11,7 +11,7 @@ import java.util.Observer;
 /**
  * Created by Admin on 06.01.2017.
  */
-public class Cook extends Observable implements Observer {
+public class Cook extends Observable {
 
     private String name;
 
@@ -26,12 +26,11 @@ public class Cook extends Observable implements Observer {
         return name;
     }
 
-
-    @Override
-    public void update(Observable o, Object arg) {
-        StatisticEventManager.getInstance().register(new CookedOrderEventDataRow(((Tablet) o).toString(), this.name, ((Order) arg).getTotalCookingTime() * 60, ((Order) arg).getDishes()));
-        ConsoleHelper.writeMessage(String.format("Start cooking - %s, cooking time %dmin", arg.toString(), ((Order) arg).getTotalCookingTime()));
-        setChanged();
-        notifyObservers(arg);
+    public void startCookingOrder(Order order)
+    {
+        StatisticEventManager.getInstance().register(new CookedOrderEventDataRow(order.getTablet().toString(), this.name,
+                order.getTotalCookingTime() * 60, order.getDishes()));
+        ConsoleHelper.writeMessage(String.format("Start cooking - %s, cooking time %dmin", order.toString(), order.getTotalCookingTime()));
     }
+
 }
