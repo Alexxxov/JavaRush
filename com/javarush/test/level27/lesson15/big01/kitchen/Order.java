@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class Order
 {
-    private List<Dish> dishes;
+    protected List<Dish> dishes;
     private Tablet tablet;
 
     public Order(Tablet tablet) throws IOException
     {
         this.tablet = tablet;
-        this.dishes = ConsoleHelper.getAllDishesForOrder();
+        initDishes();
     }
 
     public List<Dish> getDishes() {
@@ -35,6 +35,11 @@ public class Order
         for(Dish d: dishes)
             total += d.getDuration();
         return total;
+    }
+
+    protected void initDishes() throws IOException
+    {
+        this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
 
     @Override

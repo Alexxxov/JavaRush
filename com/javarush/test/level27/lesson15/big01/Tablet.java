@@ -3,6 +3,7 @@ package com.javarush.test.level27.lesson15.big01;
 import com.javarush.test.level27.lesson15.big01.ad.AdvertisementManager;
 import com.javarush.test.level27.lesson15.big01.ad.NoVideoAvailableException;
 import com.javarush.test.level27.lesson15.big01.kitchen.Order;
+import com.javarush.test.level27.lesson15.big01.kitchen.TestOrder;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -21,34 +22,52 @@ public class Tablet extends Observable {
         this.number = number;
     }
 
-    public void createOrder()
+    public void createTestOrder()
     {
-        Order order;
+
         try
         {
-                order = new Order(this);
-                if (!order.isEmpty())
-                {
-                    ConsoleHelper.writeMessage(order.toString());
-                    try
-                    {
-                        new AdvertisementManager(order.getTotalCookingTime() * 60).processVideos();
-                    }
-                    catch (NoVideoAvailableException e)
-                    {
-                        logger.log(Level.INFO, "No video is available for the order " + order);
-                    }
-
-                    setChanged();
-                    notifyObservers(order);
-                }
+            Order order = new TestOrder(this);
+            createOrderSubroutine(order);
         }
 
         catch (IOException e)
         {
             logger.log(Level.SEVERE, "Console is unavailable.");
         }
+    }
 
+    public void createOrder()
+    {
+        try
+        {
+            Order order = new Order(this);
+            createOrderSubroutine(order);
+
+        }
+        catch (IOException e)
+        {
+            logger.log(Level.SEVERE, "Console is unavailable.");
+        }
+
+    }
+
+    private void createOrderSubroutine(Order order)
+    {
+        if (!order.isEmpty())
+        {
+            ConsoleHelper.writeMessage(order.toString());
+            try
+            {
+                new AdvertisementManager(order.getTotalCookingTime() * 60).processVideos();
+                setChanged();
+                notifyObservers(order);
+            }
+            catch (NoVideoAvailableException e)
+            {
+                logger.log(Level.INFO, "No video is available for the order " + order);
+            }
+        }
     }
 
     @Override

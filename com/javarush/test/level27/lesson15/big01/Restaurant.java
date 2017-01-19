@@ -4,27 +4,44 @@ package com.javarush.test.level27.lesson15.big01;
 import com.javarush.test.level27.lesson15.big01.kitchen.Cook;
 import com.javarush.test.level27.lesson15.big01.kitchen.Waitor;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 05.01.2017.
  */
 public class Restaurant {
 
+    private static final int ORDER_CREATING_INTERVAL = 100;
+
     public static void main(String[] args) {
+
+        List<Tablet> allTablets = new ArrayList<>();
         Cook cook1 = new Cook("Ivanov");
         Cook cook2 = new Cook("Petrov");
-        Tablet tablet1 = new Tablet(5);
-        Tablet tablet2 = new Tablet(6);
         Waitor waitor = new Waitor();
-        tablet1.addObserver(cook1);
         cook1.addObserver(waitor);
-        tablet2.addObserver(cook2);
         cook2.addObserver(waitor);
-        tablet1.createOrder();
-        tablet1.createOrder();
-        tablet2.createOrder();
-        tablet2.createOrder();
+        for (int i = 1; i <= 10; i++)
+        {
+            allTablets.add(new Tablet(i));
+
+            if(i % 2 == 0)
+                allTablets.get(i-1).addObserver(cook1);
+            else
+                allTablets.get(i-1).addObserver(cook2);
+        }
+        RandomOrderGeneratorTask generator = new RandomOrderGeneratorTask(allTablets, ORDER_CREATING_INTERVAL);
+        Thread thread = new Thread(generator);
+        thread.start();
+        try
+        {
+            thread.join();
+        }
+        catch(InterruptedException e)
+        {}
+
+        thread.interrupt();
 
         DirectorTablet directorTablet = new DirectorTablet();
         directorTablet.printAdvertisementProfit();
