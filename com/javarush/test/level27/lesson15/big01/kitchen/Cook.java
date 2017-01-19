@@ -18,7 +18,7 @@ public class Cook extends Observable implements Observer {
     public Cook(String name)
     {
         this.name = name;
-        StatisticEventManager.getInstance().register(this);
+        //StatisticEventManager.getInstance().register(this);
     }
 
     @Override

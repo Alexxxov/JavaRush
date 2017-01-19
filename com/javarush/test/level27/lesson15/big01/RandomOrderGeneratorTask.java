@@ -7,25 +7,25 @@ import java.util.List;
  */
 public class RandomOrderGeneratorTask implements Runnable {
 
-    private List<Tablet> allTablets;
+    private List<Tablet> tablets;
     private int interval;
 
-    public RandomOrderGeneratorTask(List<Tablet> allTablets, int interval)
+    public RandomOrderGeneratorTask(List<Tablet> tablets, int interval)
     {
-        this.allTablets = allTablets;
+        this.tablets = tablets;
         this.interval = interval;
     }
 
     @Override
     public void run()
     {
-        if (allTablets.isEmpty())
+        if (tablets.isEmpty())
             return;
         try
         {
             while (!Thread.currentThread().isInterrupted())
             {
-                Tablet tablet =  allTablets.get((int)(Math.random()* allTablets.size()));
+                Tablet tablet =  tablets.get((int)(Math.random()* tablets.size()));
                 tablet.createTestOrder();
                 Thread.sleep(interval);
             }
