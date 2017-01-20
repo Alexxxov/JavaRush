@@ -39,6 +39,10 @@ public class StatisticEventManager {
         cooks.add(cook);
     }
 
+    public Set<Cook> getCooks() {
+        return cooks;
+    }
+
     public Map<Date, Long> getAllAdsProfitPerDay()
     {
         Map<Date, Long> result = new TreeMap<>(Collections.<Date>reverseOrder());

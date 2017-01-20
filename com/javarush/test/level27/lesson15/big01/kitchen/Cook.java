@@ -14,11 +14,16 @@ import java.util.Observer;
 public class Cook extends Observable {
 
     private String name;
+    private boolean busy;
 
     public Cook(String name)
     {
         this.name = name;
         //StatisticEventManager.getInstance().register(this);
+    }
+
+    public boolean isBusy() {
+        return busy;
     }
 
     @Override
@@ -28,9 +33,22 @@ public class Cook extends Observable {
 
     public void startCookingOrder(Order order)
     {
+        busy = true;
+
+        ConsoleHelper.writeMessage(String.format("Start cooking - %s, cooking time %dmin", order.toString(), order.getTotalCookingTime()));
+        try
+        {
+            Thread.currentThread().sleep(order.getTotalCookingTime() * 10);
+        }
+        catch (InterruptedException e)
+        {}
         StatisticEventManager.getInstance().register(new CookedOrderEventDataRow(order.getTablet().toString(), this.name,
                 order.getTotalCookingTime() * 60, order.getDishes()));
-        ConsoleHelper.writeMessage(String.format("Start cooking - %s, cooking time %dmin", order.toString(), order.getTotalCookingTime()));
+
+        setChanged();
+        notifyObservers(order);
+
+        busy = false;
     }
 
 }
