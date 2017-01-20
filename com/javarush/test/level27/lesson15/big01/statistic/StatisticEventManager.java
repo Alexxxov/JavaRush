@@ -15,7 +15,6 @@ import java.util.*;
  */
 public class StatisticEventManager {
 
-    private Set<Cook> cooks;
     private StatisticStorage statisticStorage = new StatisticStorage();
     private static StatisticEventManager ourInstance = new StatisticEventManager();
 
@@ -26,21 +25,11 @@ public class StatisticEventManager {
     private StatisticEventManager()
     {
         this.statisticStorage = new StatisticStorage();
-        this.cooks = new HashSet<>();
     }
 
     public void register(EventDataRow data)
     {
         statisticStorage.put(data);
-    }
-
-    public void register(Cook cook)
-    {
-        cooks.add(cook);
-    }
-
-    public Set<Cook> getCooks() {
-        return cooks;
     }
 
     public Map<Date, Long> getAllAdsProfitPerDay()
