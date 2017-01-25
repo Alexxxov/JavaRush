@@ -21,7 +21,7 @@ public class HHStrategy implements Strategy {
 
         try
         {
-            Document doc = Jsoup.connect("https://hh.ru").get();
+            Document doc = Jsoup.connect("https://hh.ru").userAgent("Chrome/55.0.2883.87").referrer("https://hh.livetex.ru/client.html").get();
         }
         catch (IOException e)
         {
