@@ -12,6 +12,16 @@ public class Vacancy {
     private String siteName;
     private String url;
 
+    @Override
+    public String toString() {
+        return title + '\'' +
+                salary + '\'' +
+                city + '\'' +
+                companyName + '\'' +
+                siteName + '\'' +
+                url + '\'' ;
+    }
+
     public String getTitle() {
         return title;
     }
