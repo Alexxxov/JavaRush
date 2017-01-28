@@ -40,7 +40,7 @@ public class HHStrategy implements Strategy {
                     {
                         Vacancy vacancy = new Vacancy();
 
-                        //можно довать требования и обязанности
+                        //можно добавить требования и обязанности
                         //"vacancy-serp__vacancy_snippet_responsibility"
                         //"vacancy-serp__vacancy_snippet_requirement"
 

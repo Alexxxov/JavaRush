@@ -32,7 +32,7 @@ public class Controller {
         List<Vacancy> vacancyResultList = new ArrayList<>();
         for (Provider p: providers)
         {
-            List<Vacancy> vacancies = p.getJavaVacancies("odess");
+            List<Vacancy> vacancies = p.getJavaVacancies("Moscow");
             for (Vacancy v: vacancies)
                 vacancyResultList.add(v);
         }
