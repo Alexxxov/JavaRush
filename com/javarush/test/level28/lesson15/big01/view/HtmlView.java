@@ -3,6 +3,7 @@ package com.javarush.test.level28.lesson15.big01.view;
 import com.javarush.test.level28.lesson15.big01.Controller;
 import com.javarush.test.level28.lesson15.big01.vo.Vacancy;
 
+import java.io.*;
 import java.util.List;
 
 /**
@@ -16,8 +17,14 @@ public class HtmlView implements View {
     @Override
     public void update(List<Vacancy> vacancies)
     {
-        updateFile(getUpdatedFileContent(vacancies));
-//        System.out.println(filePath);
+        try
+        {
+            updateFile(getUpdatedFileContent(vacancies));
+        }
+        catch (Exception e)
+        {
+         e.printStackTrace();
+        }
     }
 
     @Override
@@ -36,8 +43,10 @@ public class HtmlView implements View {
         return "";
     }
 
-    private void updateFile(String filename)
+    private void updateFile(String file) throws IOException
     {
-        //TODO
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.write(file);
+        writer.close();
     }
 }
