@@ -11,11 +11,13 @@ import java.util.List;
 public class HtmlView implements View {
 
     private Controller controller;
+    private final String filePath = "./src/" + this.getClass().getPackage().getName().replaceAll("[\\.\\s]+","/") + "/vacancies.html";
 
     @Override
     public void update(List<Vacancy> vacancies)
     {
-        System.out.println(vacancies.size());
+        updateFile(getUpdatedFileContent(vacancies));
+//        System.out.println(filePath);
     }
 
     @Override
@@ -26,5 +28,16 @@ public class HtmlView implements View {
     public void userCitySelectEmulationMethod()
     {
         controller.onCitySelect("Odessa");
+    }
+
+    private String getUpdatedFileContent(List<Vacancy> updatedVacancies)
+    {
+        //TODO
+        return "";
+    }
+
+    private void updateFile(String filename)
+    {
+        //TODO
     }
 }
