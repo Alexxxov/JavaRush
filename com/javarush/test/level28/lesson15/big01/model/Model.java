@@ -15,7 +15,7 @@ public class Model {
     private Provider[] providers;
 
     public Model(View view, Provider... providers) {
-        if (view == null || providers.length == 0)
+        if (view == null || providers.length == 0 || providers == null)
             throw new IllegalArgumentException();
         this.view = view;
         this.providers = providers;
