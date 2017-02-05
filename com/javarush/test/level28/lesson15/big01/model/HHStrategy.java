@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class HHStrategy implements Strategy {
 
-    private static final String URL_FORMAT = "http://hh.ru/search/vacancy?text=java+%s&page=%d";
+    private static final String URL_FORMAT = "https://hh.ru/search/vacancy?text=java+%s&enable_snippets=true&clusters=true&page=%d";
     //https://hh.ru/search/vacancy?text=java+Москва&enable_snippets=true&clusters=true&page=1
     //http://javarush.ru/testdata/big28data.html
     //http://hh.ua/search/vacancy?text=java+%s&page=%d
@@ -29,35 +29,40 @@ public class HHStrategy implements Strategy {
             int pageCounter = 0;
            while (true)
            {
-                Document doc = getDocument(searchString, pageCounter);
-                if (doc == null)
+               Document doc = getDocument(searchString, pageCounter++);
+               if (doc == null)
+                   break;
+               Elements vacanciesPerPage = doc.getElementsByAttributeValue("data-qa","vacancy-serp__vacancy");
+
+               if (vacanciesPerPage.isEmpty())
                     break;
-                Elements elements = doc.getElementsByAttributeValue("data-qa","vacancy-serp__vacancy");
+               for (Element element: vacanciesPerPage)
+               {
+                   Vacancy vacancy = new Vacancy();
+                   Elements elem;
 
-                if (!elements.isEmpty())
-                {
-                    for (Element elem: elements)
-                    {
-                        Vacancy vacancy = new Vacancy();
+                   vacancy.setSiteName("http://hh.ru/");
 
-                        //можно добавить требования и обязанности
-                        //"vacancy-serp__vacancy_snippet_responsibility"
-                        //"vacancy-serp__vacancy_snippet_requirement"
+                   //можно добавить требования и обязанности
+                   //"vacancy-serp__vacancy_snippet_responsibility"
+                   //"vacancy-serp__vacancy_snippet_requirement"
 
-                        vacancy.setSiteName(doc.title());
-                        vacancy.setTitle(elem.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-title").text());
-                        vacancy.setCity(elem.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-address").text());
-                        vacancy.setCompanyName(elem.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-employer").text());
-                        vacancy.setUrl(elem.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-title").attr("href"));
-                        vacancy.setSalary(elem.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-compensation").text());
-                        vacancyList.add(vacancy);
-                    }
-                }
-                else
-                    break;
-                ++pageCounter;
-            }
+                   elem = element.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-title");
+                   vacancy.setTitle(elem.size() != 0 ? elem.first().text() : "");
+                   vacancy.setUrl(elem.size() != 0 ? elem.attr("href") : "");
 
+                   elem = element.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-compensation");
+                   vacancy.setSalary(elem.size() != 0 ? elem.first().text() : "");
+
+                   elem = element.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-address");
+                   vacancy.setCity(elem.size() != 0 ? elem.first().text() : "");
+
+                   elem = element.getElementsByAttributeValue("data-qa", "vacancy-serp__vacancy-employer");
+                   vacancy.setCompanyName(elem.size() != 0 ? elem.first().text() : "");
+
+                   vacancyList.add(vacancy);
+               }
+           }
         }
         catch (IOException e)
         {
@@ -69,6 +74,9 @@ public class HHStrategy implements Strategy {
     protected Document getDocument(String searchString, int page) throws IOException
     {
         String ref = String.format(URL_FORMAT,searchString, page);
-        return Jsoup.connect(ref).userAgent("Chrome/55.0.2883.87").referrer("https://hh.livetex.ru/client.html").get();
+        return Jsoup.connect(ref)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36")
+                .referrer("https://hh.ru/")
+                .get();
     }
 }
