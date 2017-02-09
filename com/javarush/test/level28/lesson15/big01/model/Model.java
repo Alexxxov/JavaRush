@@ -1,7 +1,7 @@
 package com.javarush.test.level28.lesson15.big01.model;
 
 import com.javarush.test.level28.lesson15.big01.view.View;
-import com.javarush.test.level28.lesson15.big01.vo.Vacancy;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +12,25 @@ import java.util.List;
 public class Model {
 
     private View view;
-    private Provider[] providers;
+    private List<Provider> providers;
 
-    public Model(View view, Provider... providers) {
-        if (view == null || providers.length == 0 || providers == null)
+    public Model(View view, List<Provider> providers) {
+        if (view == null || providers == null)
             throw new IllegalArgumentException();
         this.view = view;
         this.providers = providers;
     }
 
-    public void selectCity(String city)
+    public <T> ObservableList<T> userQuery(String query)
     {
-        List<Vacancy> vacancies = new ArrayList<>();
+        List<T> vacancies = new ArrayList<>();
+        List<T> vacancyPerProvider;
         for (Provider p: providers)
-             vacancies.addAll(p.getJavaVacancies(city));
+        {
+            vacancyPerProvider = p.getJavaVacancies(query);
+            vacancies.addAll(vacancyPerProvider);
+        }
 
-        view.update(vacancies);
+       return view.update(vacancies);
     }
 }

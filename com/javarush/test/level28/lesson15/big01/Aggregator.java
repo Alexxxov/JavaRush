@@ -1,26 +1,27 @@
 package com.javarush.test.level28.lesson15.big01;
 
-import com.javarush.test.level28.lesson15.big01.model.HHStrategy;
-import com.javarush.test.level28.lesson15.big01.model.Model;
-import com.javarush.test.level28.lesson15.big01.model.MoikrugStrategy;
-import com.javarush.test.level28.lesson15.big01.model.Provider;
-import com.javarush.test.level28.lesson15.big01.view.HtmlView;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 
 /**
  * Created by Admin on 24.01.2017.
  */
-public class Aggregator {
-    public static void main(String[] args)
-    {
-        Provider hhProvider = new Provider(new HHStrategy());
-        Provider moiKrugProvider = new Provider(new MoikrugStrategy());
+public class Aggregator extends Application {
 
-        HtmlView htmlView = new HtmlView();
-        Model model = new Model(htmlView, hhProvider, moiKrugProvider);
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("gui/myGui.fxml"));
+        primaryStage.setTitle("Website parser");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, 740, 500));
+        primaryStage.show();
+    }
 
-        Controller controller = new Controller(model);
-        htmlView.setController(controller);
-        htmlView.userCitySelectEmulationMethod();
-
+    public static void main(String[] args) {
+        launch(args);
     }
 }

@@ -1,5 +1,8 @@
 package com.javarush.test.level28.lesson15.big01.vo;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * Created by Admin on 25.01.2017.
  */
@@ -68,6 +71,24 @@ public class Vacancy {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public SimpleStringProperty titleProperty()
+    {
+        return new SimpleStringProperty(title);
+    }
+
+    public SimpleStringProperty cityProperty()
+    {
+        return new SimpleStringProperty(city);
+    }
+    public SimpleStringProperty companyNameProperty()
+    {
+        return new SimpleStringProperty(companyName);
+    }
+    public SimpleStringProperty salaryProperty()
+    {
+        return new SimpleStringProperty(salary);
     }
 
     @Override

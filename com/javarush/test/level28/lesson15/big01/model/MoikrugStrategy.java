@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MoikrugStrategy implements Strategy {
 
-    private static final String URL_FORMAT = "https://moikrug.ru/vacancies?q=java+%s&page=%d";
+    private static final String URL_FORMAT = "https://moikrug.ru/vacancies?q=%s&page=%d";
     //http://javarush.ru/testdata/big28data2.html
     //https://moikrug.ru/vacancies?q=java+%s&page=%d
     //https://moikrug.ru/vacancies?city_id=&location=&page=%d&q=java+%s&utf8=✓
@@ -23,7 +23,7 @@ public class MoikrugStrategy implements Strategy {
     @Override
     public List<Vacancy> getVacancies(String searchString)
     {
-        List<Vacancy> vacancies = new ArrayList<>();
+        List<Vacancy> vacancyList = new ArrayList<>();
         try
         {
             int pageCounter = 0;
@@ -55,14 +55,14 @@ public class MoikrugStrategy implements Strategy {
                     elem = element.select(".location");
                     vacancy.setCity(elem.size() != 0 ? elem.first().text() : "");
 
-                    vacancies.add(vacancy);
+                    vacancyList.add(vacancy);
                 }
             }
         }
         catch (IOException e)
         {}
 
-        return vacancies;
+        return vacancyList;
     }
 
     protected Document getDocument(String searchString, int page) throws IOException
