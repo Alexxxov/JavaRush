@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javarush.test.level28.lesson15.big01.FXMLController">
+
+<AnchorPane id="pane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javarush.test.level28.lesson15.big01.FXMLController">
     <children>
-        <TextField fx:id="textField" layoutX="170.0" layoutY="35.0" prefHeight="30.0" prefWidth="350.0" promptText="Java junior developer" />
+        <TextField id="searchTextField" fx:id="textField" layoutX="170.0" layoutY="35.0" prefHeight="30.0" prefWidth="350.0" promptText="   e.g. Java junior developer" stylesheets="@style.css">
+         <tooltip>
+            <Tooltip text="Введите название вакансии" />
+         </tooltip>
+      </TextField>
         <Label fx:id="labelVacancy" layoutX="44.0" layoutY="43.0" text="Введите вакансию:">
          <font>
             <Font name="Serif Bold" size="14.0" />
-         </font></Label>
-        <Button id="btn" fx:id="btnSearch" layoutX="575.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnAct" prefHeight="40.0" prefWidth="123.0" stylesheets="@style.css" text="Поиск">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="Serif Regular" size="14.0" />
          </font>
-         <effect>
-            <Lighting diffuseConstant="0.93" specularConstant="0.0" specularExponent="23.72" surfaceScale="2.32">
-               <bumpInput>
-                  <Shadow height="12.1" width="29.9" />
-               </bumpInput>
-            </Lighting>
-         </effect></Button>
+         <tooltip>
+            <Tooltip text="Введите вакансию" />
+         </tooltip>
+      </Label>
       <CheckBox fx:id="hhCheckBox" layoutX="170.0" layoutY="94.0" mnemonicParsing="false" text="hh.ru">
          <font>
             <Font name="Serif Regular" size="14.0" />
-         </font></CheckBox>
+         </font>
+      </CheckBox>
       <CheckBox fx:id="moikrugCheckBox" layoutX="240.0" layoutY="94.0" mnemonicParsing="false" text="moikrug.ru">
          <font>
             <Font name="Serif Regular" size="14.0" />
-         </font></CheckBox>
+         </font>
+      </CheckBox>
       <Label fx:id="labelSites" layoutX="57.0" layoutY="95.0" text="Выберите сайты:">
          <font>
             <Font name="Serif Bold" size="14.0" />
          </font>
+         <tooltip>
+            <Tooltip text="Выберите сайты" />
+         </tooltip>
       </Label>
-      <TableView fx:id="tableView" layoutX="18.0" layoutY="134.0" prefHeight="338.0" prefWidth="700.0">
+      <TableView fx:id="tableView" layoutX="18.0" layoutY="134.0" prefHeight="338.0" prefWidth="700.0" styleClass="table" stylesheets="@style.css">
         <columns>
-          <TableColumn id="title" fx:id="titleColumn" prefWidth="250.0" text="Title" />
-          <TableColumn id="city" fx:id="cityColumn" prefWidth="100.0" text="City" />
-          <TableColumn id="company" fx:id="companyColumn" prefWidth="250.0" text="Company" />
-          <TableColumn id="salary" fx:id="salaryColumn" prefWidth="100.0" text="Salary" />
+          <TableColumn fx:id="titleColumn" editable="false" prefWidth="214.0" styleClass="title" text="Title" />
+          <TableColumn id="city" fx:id="cityColumn" editable="false" prefWidth="119.0" text="City" />
+          <TableColumn id="company" fx:id="companyColumn" editable="false" prefWidth="235.0" text="Company" />
+          <TableColumn id="salary" fx:id="salaryColumn" editable="false" prefWidth="132.0" text="Salary" />
         </columns>
       </TableView>
+      <Button layoutX="575.0" layoutY="91.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="25.0" prefWidth="72.0" text="Save" />
+      <ToggleButton id="btn" fx:id="btnSearch" layoutX="575.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnAct" prefHeight="40.0" prefWidth="120.0" stylesheets="@style.css" text="Поиск" />
     </children>
 </AnchorPane>

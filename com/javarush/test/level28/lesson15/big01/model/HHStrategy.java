@@ -24,6 +24,7 @@ public class HHStrategy implements Strategy {
     @Override
     public List<Vacancy> getVacancies(String searchString)
     {
+        // TODO !!!!! when search Водитель get 2000 vacancies instead of 6409 !!! use another data container
         List<Vacancy> vacancyList = new ArrayList<>();
         try
         {

@@ -77,6 +77,10 @@ public class Vacancy {
     {
         return new SimpleStringProperty(title);
     }
+    public SimpleStringProperty urlProperty()
+    {
+        return new SimpleStringProperty(url);
+    }
 
     public SimpleStringProperty cityProperty()
     {

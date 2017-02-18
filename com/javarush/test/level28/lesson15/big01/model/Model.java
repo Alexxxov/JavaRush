@@ -21,7 +21,7 @@ public class Model {
         this.providers = providers;
     }
 
-    public <T> ObservableList<T> userQuery(String query)
+    public <T> List<T> userQuery(String query)
     {
         List<T> vacancies = new ArrayList<>();
         List<T> vacancyPerProvider;

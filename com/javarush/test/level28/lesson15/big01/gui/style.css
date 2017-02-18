@@ -6,6 +6,9 @@
         linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);
     -fx-background-insets: 0,1,4,5;
     -fx-background-radius: 9,8,5,4;
+    -fx-border-width: 3px;
+    -fx-border-radius: 9,8,5,4;
+    -fx-border-color: black;
     -fx-padding: 10 15 10 15;
     -fx-font-family: "Helvetica";
     -fx-font-size: 18px;
@@ -13,8 +16,41 @@
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
-#btn Text {
-    -fx-effect: dropshadow( one-pass-box , white , 0, 0.0 , 0 , 1 );
+
+#btn:hover {
+    -fx-background-color:
+        linear-gradient(#232723 25%, #686868 0%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#c2c2c2 20%, #b9b9b9 0%, #afafaf 80%, #c8c8c8 100%),
+        linear-gradient(#dbdbdb 50%, #f5f5f5 0%, #cacaca 51%, #d7d7d7 100%);
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.1) , 1, 0.0 , 0 , 1);
+    -fx-border-color: #01ff70;
+}
+
+#btn:pressed {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+    -fx-border-color: #7fdbff;
+}
+#searchTextField {
+        -fx-background-image: url("search.png");
+        -fx-background-position: 5px, 10px;
+        -fx-background-repeat: no-repeat;
+        -fx-background-color: white;
+        -fx-background-insets: 3,3,3,3;
+        -fx-background-radius: 3,3,3,3;
+        -fx-border-width: 3px;
+        -fx-border-style: solid;
+        -fx-border-color: #456879;
+        -fx-border-radius: 10px;
+        -fx-outline: none;
+}
+#searchTextField:hover {
+    -fx-border-color: #01ff70;
+}
+
+#searchTextField:focused {
+        -fx-border-color: #7fdbff;
 }
 
 #pane {
@@ -22,4 +58,26 @@
     -fx-background-repeat: stretch;
     -fx-background-position: center;
     -fx-background-size: 800 600;
+}
+
+.table-row-cell:filled:selected {
+  -fx-background: -fx-control-inner-background ;
+  -fx-background-color: -fx-table-cell-border-color, -fx-background ;
+  -fx-background-insets: 0, 0 0 1 0 ;
+  -fx-table-cell-border-color: derive(-fx-color, 5%);
+}
+.table-row-cell:odd:filled:selected {
+  -fx-background: -fx-control-inner-background-alt ;
+}
+
+.table-row-cell:hover{
+    -fx-background-color: #fcf8e3 !important ;
+}
+.table-row-cell:empty {
+    -fx-background-color: white !important;
+}
+
+.title:hover {
+    -fx-text-fill: blue;
+    -fx-text-decoration: underline;
 }

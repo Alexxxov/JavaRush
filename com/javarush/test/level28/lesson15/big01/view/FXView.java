@@ -15,9 +15,9 @@ public class FXView implements View {
     private final String filePath = "./src/" + this.getClass().getPackage().getName().replaceAll("[\\.\\s]+","/") + "/vacancies.html";
 
     @Override
-    public <T> ObservableList<T> update(List<T> vacancies)
+    public <T> List<T> update(List<T> vacancies)
     {
-        return FXCollections.observableList(vacancies);
+        return vacancies;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class FXView implements View {
         this.controller = controller;
     }
 
-    public <T> ObservableList<T> userInputQuery(String query)
+    public <T> List<T> userInputQuery(String query)
     {
         return controller.userQuery(query.trim());
     }
