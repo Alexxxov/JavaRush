@@ -15,11 +15,13 @@ import java.util.Optional;
  * Created by Admin on 24.01.2017.
  */
 public class Aggregator extends Application {
-    public static Parent root;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        root = FXMLLoader.load(getClass().getResource("gui/myGui.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/parser/myGui.fxml"));
+        Parent root = loader.load();
+
         primaryStage.setTitle("Website parser");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 740, 500));

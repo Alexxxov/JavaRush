@@ -14,8 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -84,9 +83,15 @@ public class WorkIndicatorDialog<P> {
         root.getChildren().add(mainPane);
         vbox.setSpacing(5);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setMinSize(330, 120);
+        vbox.setPrefSize(330, 120);
+        //add gray borders to our window
+        vbox.setStyle("-fx-border-style: solid;" +
+                "-fx-border-width: 3;" +
+                "-fx-border-color: gray;");
         vbox.getChildren().addAll(label,progressIndicator);
+
         mainPane.setTop(vbox);
+
         dialog.setScene(scene);
 
         dialog.setOnHiding(event -> { /* Gets notified when task ended, but BEFORE

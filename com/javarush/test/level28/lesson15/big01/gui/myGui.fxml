@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="pane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javarush.test.level28.lesson15.big01.FXMLController">
     <children>
-        <TextField id="searchTextField" fx:id="textField" layoutX="170.0" layoutY="35.0" prefHeight="30.0" prefWidth="350.0" promptText="   e.g. Java junior developer" stylesheets="@style.css">
+        <TextField id="searchTextField" fx:id="textField" layoutX="170.0" layoutY="35.0" prefHeight="30.0" prefWidth="350.0" promptText="e.g. Java junior developer" stylesheets="@style.css" text="Java junior developer">
          <tooltip>
             <Tooltip text="Введите название вакансии" />
          </tooltip>

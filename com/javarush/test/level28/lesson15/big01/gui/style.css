@@ -32,6 +32,7 @@
     -fx-text-fill: white;
     -fx-border-color: #7fdbff;
 }
+
 #searchTextField {
         -fx-background-image: url("search.png");
         -fx-background-position: 5px, 10px;
@@ -39,12 +40,15 @@
         -fx-background-color: white;
         -fx-background-insets: 3,3,3,3;
         -fx-background-radius: 3,3,3,3;
+        /* set left padding for search.png */
+        -fx-padding: 0 0 0 20;
         -fx-border-width: 3px;
         -fx-border-style: solid;
         -fx-border-color: #456879;
         -fx-border-radius: 10px;
         -fx-outline: none;
 }
+
 #searchTextField:hover {
     -fx-border-color: #01ff70;
 }
@@ -66,6 +70,7 @@
   -fx-background-insets: 0, 0 0 1 0 ;
   -fx-table-cell-border-color: derive(-fx-color, 5%);
 }
+
 .table-row-cell:odd:filled:selected {
   -fx-background: -fx-control-inner-background-alt ;
 }
@@ -73,11 +78,8 @@
 .table-row-cell:hover{
     -fx-background-color: #fcf8e3 !important ;
 }
+
 .table-row-cell:empty {
     -fx-background-color: white !important;
 }
 
-.title:hover {
-    -fx-text-fill: blue;
-    -fx-text-decoration: underline;
-}

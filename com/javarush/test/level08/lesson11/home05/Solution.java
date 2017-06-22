@@ -1,7 +1,5 @@
 package com.javarush.test.level08.lesson11.home05;
 
-import sun.beans.editors.IntegerEditor;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

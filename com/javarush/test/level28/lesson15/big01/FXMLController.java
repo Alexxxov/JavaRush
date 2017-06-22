@@ -5,12 +5,15 @@ import com.javarush.test.level28.lesson15.big01.view.FXView;
 import com.javarush.test.level28.lesson15.big01.vo.Vacancy;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
@@ -82,14 +85,21 @@ public class FXMLController implements Initializable
                     }
             });
 
-
-//            //when hover cell
-//            cell.hoverProperty().addListener( listener ->
-//            {
-//                text.setFill(Color.BLUE);
-//                text.setUnderline(true);
-//
-//            });
+            // 1 column text imitates hyperlinks on mouse events
+            cell.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    text.setFill(Color.BLUE);
+                    text.setUnderline(true);
+                }
+            });
+            cell.setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    text.setFill(Color.BLACK);
+                    text.setUnderline(false);
+                }
+            });
 
             text.wrappingWidthProperty().bind(titleColumn.widthProperty());
             text.textProperty().bind(cell.itemProperty());
@@ -147,16 +157,52 @@ public class FXMLController implements Initializable
         WorkIndicatorDialog wd = new WorkIndicatorDialog(mainPane.getScene().getWindow(), "Loading vacancies...");
 
         wd.addTaskEndNotification(result -> {
-            alertMsg("Найдено " + tableContent.size() + " вакансии");
+            mainPane.setDisable(false);
+            String vacancyStr = checkVacancyStr(tableContent.size());
+            alertMsg("Найдено " + vacancyStr);
             tableView.setItems(FXCollections.observableList(tableContent));
         });
 
 
         wd.exec("1", inputParam -> {
+            //sets grey background
+            mainPane.setDisable(true);
             tableContent = startParsing(searchText);
             return 1;
         });
 
+    }
+
+    private String checkVacancyStr(int size)
+    {
+        //11-19 вакансий
+        //1 вакансия
+        //2-4 вакансии --
+        //0, 5-9 вакансий -
+
+        String sizeStr = String.valueOf(size);
+        String endChar = String.valueOf(sizeStr.charAt(sizeStr.length()-1));
+        String beforeEndChar = String.valueOf(sizeStr.charAt(sizeStr.length()-2));
+        String vacancyStr = " вакансий.";
+        if (beforeEndChar.equals("1"))
+            return size + vacancyStr;
+        else
+        {
+            switch (endChar)
+            {
+                case "1":
+                    vacancyStr = " вакансия.";
+                    break;
+                case "2":
+                case "3":
+                case "4":
+                    vacancyStr = " вакансии.";
+                    break;
+                default:
+                    break;
+            }
+        }
+        return size+vacancyStr;
     }
 
     private <T> List<T> startParsing(String vacancyText)

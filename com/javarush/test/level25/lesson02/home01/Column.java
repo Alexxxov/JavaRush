@@ -2,8 +2,6 @@ package com.javarush.test.level25.lesson02.home01;
 
 import java.util.*;
 
-import org.apache.commons.collections4.list.*;
-
 public enum Column implements Columnable
 {
     Customer("Customer"),
